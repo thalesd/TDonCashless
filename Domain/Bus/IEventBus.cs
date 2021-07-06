@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using TDonCashless.Domain.Core.Commands;
 using TDonCashless.Domain.Core.Events;
 
-namespace Domain.Bus
+namespace TDonCashless.Domain.Core.Bus
 {
     public interface IEventBus
     {
