@@ -1,16 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using IOCLayer;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using TDonCashless.Microservices.CreateCustomerCard.Data.Context;
 
 namespace TDonCashless.Microservices.CreateCustomerCard.API
 {
@@ -26,12 +23,24 @@ namespace TDonCashless.Microservices.CreateCustomerCard.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMediatR(typeof(Startup));
+
+            services.AddDbContext<CustomerCardDbContext>(options => {
+                options.UseSqlServer(Configuration.GetConnectionString("CustomerCardDbConnection"), optionsBuilder => optionsBuilder.MigrationsAssembly("TDonCashless.Microservices.CreateCustomerCard.API"));
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TDonCashless.Microservices.CreateCustomerCard.API", Version = "v1" });
             });
+
+            RegisterServices(services);
+        }
+
+        private void RegisterServices(IServiceCollection services)
+        {
+            DependencyContainer.RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
