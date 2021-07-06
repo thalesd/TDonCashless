@@ -6,5 +6,7 @@ namespace TDonCashless.Microservices.CreateCustomerCard.Domain.Interfaces
     public interface ICustomerCardRepository
     {
         IEnumerable<CustomerCard> GetCustomerCards();
+
+        CustomerCard InsertNewCustomerCard(CustomerCard newCard);
     }
 }

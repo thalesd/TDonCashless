@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TDonCashless.Microservices.CreateCustomerCard.Application.DTOs;
 using TDonCashless.Microservices.CreateCustomerCard.Application.Interfaces;
 using TDonCashless.Microservices.CreateCustomerCard.Data.Repository;
 using TDonCashless.Microservices.CreateCustomerCard.Domain.Models;
@@ -27,6 +28,13 @@ namespace TDonCashless.Microservices.CreateCustomerCard.API.Controllers
         public ActionResult<IEnumerable<CustomerCard>> Get()
         {
             return Ok(_customerCardService.GetCustomerCards());
+        }
+
+        [HttpPost]
+        public ActionResult<CustomerCardCreatedDTO> Post([FromBody] CustomerCardCreationDTO customerCard){
+            _customerCardService.CreateCustomerCard(customerCard);
+            
+            return Ok();
         }
     }
 }

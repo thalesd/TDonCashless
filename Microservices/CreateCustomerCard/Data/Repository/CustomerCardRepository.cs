@@ -18,5 +18,13 @@ namespace TDonCashless.Microservices.CreateCustomerCard.Data.Repository
         {
             return _ctx.CustomerCards;
         }
+
+        public CustomerCard InsertNewCustomerCard(CustomerCard card){
+            _ctx.CustomerCards.Add(card);
+
+            _ctx.SaveChanges();
+
+            return card;
+        }
     }
 }
