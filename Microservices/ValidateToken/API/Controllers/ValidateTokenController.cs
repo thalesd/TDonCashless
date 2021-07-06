@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TDonCashless.Microservices.ValidateToken.Application.DTOs;
+using TDonCashless.Microservices.ValidateToken.Application.Interfaces;
 
 namespace TDonCashless.Microservices.ValidateToken.API.Controllers
 {
@@ -11,17 +13,20 @@ namespace TDonCashless.Microservices.ValidateToken.API.Controllers
     [ApiController]
     public class ValidateTokenController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly ILogger<ValidateTokenController> _logger;
+        private readonly IValidateTokenService _validateTokenService;
 
-        public ValidateTokenController(ILogger<ValidateTokenController> logger)
+        public ValidateTokenController(ILogger<ValidateTokenController> logger, IValidateTokenService validateTokenService)
         {
             _logger = logger;
+            _validateTokenService = validateTokenService;
         }
 
+        [HttpPost]
+        public ActionResult<ValidatedTokenDTO> Post([FromBody] ValidateTokenDTO validateToken){
+            var result = _validateTokenService.ValidateToken(validateToken);
+            
+            return Ok(result);
+        }
     }
 }

@@ -4,4 +4,9 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="../Domain/TDonCashless.Microservices.ValidateToken.Domain.csproj" />
+    <ProjectReference Include="../Data/TDonCashless.Microservices.ValidateToken.Data.csproj" />
+  </ItemGroup>
+
 </Project>

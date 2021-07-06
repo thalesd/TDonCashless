@@ -1,16 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using IOCLayer;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using TDonCashless.Microservices.ValidateToken.Data.Context;
 
 namespace TDonCashless.Microservices.ValidateToken.API
 {
@@ -26,12 +23,29 @@ namespace TDonCashless.Microservices.ValidateToken.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ValidatedTokenDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("ValidateTokenDbConnection"), optionsBuilder => optionsBuilder.MigrationsAssembly("TDonCashless.Microservices.ValidateToken.API"));
+            });
 
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TDonCashless.Microservices.ValidateToken.API", Version = "v1" });
             });
+
+            services.AddCors();
+
+            services.AddMediatR(typeof(Startup));
+
+
+            RegisterServices(services);
+        }
+
+        private void RegisterServices(IServiceCollection services)
+        {
+            DependencyContainer.RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
