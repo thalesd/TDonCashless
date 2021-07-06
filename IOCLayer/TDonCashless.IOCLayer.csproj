@@ -5,8 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../Domain/TDonCashless.Domain.Core.csproj" />
-    <ProjectReference Include="../BusLayer/TDonCashless.BusLayer.csproj" />
+    <ProjectReference Include="..\Domain\TDonCashless.Domain.Core.csproj" />
+    <ProjectReference Include="..\BusLayer\TDonCashless.BusLayer.csproj" />
+    <ProjectReference Include="..\Microservices\CreateCustomerCard\Application\TDonCashless.Microservices.CreateCustomerCard.Application.csproj" />
+    <ProjectReference Include="..\Microservices\CreateCustomerCard\Data\TDonCashless.Microservices.CreateCustomerCard.Data.csproj" />
+    <ProjectReference Include="..\Microservices\CreateCustomerCard\Domain\TDonCashless.Microservices.CreateCustomerCard.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

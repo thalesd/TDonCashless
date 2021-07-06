@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Domain.Models;
+using TDonCashless.Microservices.CreateCustomerCard.Domain.Models;
 
-namespace Domain.Interfaces
+namespace TDonCashless.Microservices.CreateCustomerCard.Domain.Interfaces
 {
     public interface ICustomerCardRepository
     {

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Data.Context;
-using Domain.Interfaces;
-using Domain.Models;
+using TDonCashless.Microservices.CreateCustomerCard.Data.Context;
+using TDonCashless.Microservices.CreateCustomerCard.Domain.Interfaces;
+using TDonCashless.Microservices.CreateCustomerCard.Domain.Models;
 
-namespace Data.Repository
+namespace TDonCashless.Microservices.CreateCustomerCard.Data.Repository
 {
     public class CustomerCardRepository : ICustomerCardRepository
     {

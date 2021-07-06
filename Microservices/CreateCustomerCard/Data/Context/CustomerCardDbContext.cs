@@ -1,7 +1,7 @@
-using Domain.Models;
+using TDonCashless.Microservices.CreateCustomerCard.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Data.Context
+namespace TDonCashless.Microservices.CreateCustomerCard.Data.Context
 {
     public class CustomerCardDbContext : DbContext
     {

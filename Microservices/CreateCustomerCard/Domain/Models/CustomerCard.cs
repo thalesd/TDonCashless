@@ -1,10 +1,10 @@
 using System;
 
-namespace Domain.Models
+namespace TDonCashless.Microservices.CreateCustomerCard.Domain.Models
 {
     public class CustomerCard
     {
-        public int CardId {get; set;}
+        public int CustomerCardId {get; set;}
         public int CustomerId {get; set;}
         public long CardNumber {get; set;}
         public int CVV {get; set;}
