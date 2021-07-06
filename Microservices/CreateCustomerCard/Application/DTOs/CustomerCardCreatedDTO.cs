@@ -11,9 +11,9 @@ namespace TDonCashless.Microservices.CreateCustomerCard.Application.DTOs
             this.Token = newCard.Token;
         }
 
-        public int CustomerId {get;}
-        public int CustomerCardId {get;}
-        public long Token {get;}
-        public int CVV {get;}
+        public int CustomerId {get; set;}
+        public int CustomerCardId {get; set;}
+        public long Token {get; set;}
+        public int CVV {get; set;}
     }
 }

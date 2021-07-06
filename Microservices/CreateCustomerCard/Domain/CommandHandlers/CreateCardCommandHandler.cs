@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -19,7 +20,7 @@ namespace TDonCashless.Microservices.CreateCustomerCard.Domain.CommandHandlers
         public Task<bool> Handle(CreateCardCommand request, CancellationToken cancellationToken)
         {
             //publish event to RabbitMQ
-            _bus.Publish(new CardCreatedEvent(request.CustomerId, request.CardNumber, request.CVV));
+            _bus.Publish(new CreateCardInitiatedEvent(request.CustomerId, request.CardNumber, request.CVV));
 
             return Task.FromResult(true);
         }

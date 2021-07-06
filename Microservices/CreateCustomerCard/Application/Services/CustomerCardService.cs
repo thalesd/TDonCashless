@@ -22,7 +22,11 @@ namespace TDonCashless.Microservices.CreateCustomerCard.Application.Services
 
         public void CreateCustomerCard(CustomerCardCreationDTO customerCardCreation)
         {
-            var initiateCreateCardCommand = new InitiateCreateCardCommand(customerCardCreation.CustomerId, customerCardCreation.CardNumber, customerCardCreation.CVV);
+            var initiateCreateCardCommand = new InitiateCreateCardCommand(
+                    customerCardCreation.CustomerId,
+                    customerCardCreation.CardNumber,
+                    customerCardCreation.CVV
+                );
 
             _bus.SendCommand(initiateCreateCardCommand);
         }

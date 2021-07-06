@@ -38,7 +38,6 @@ namespace TDonCashless.BusLayer
                 channel.QueueDeclare(eventName, false, false, false, null);
 
                 var message = JsonConvert.SerializeObject(@event);
-
                 var body = Encoding.UTF8.GetBytes(message);
 
                 channel.BasicPublish("", eventName, null, body);
@@ -79,7 +78,7 @@ namespace TDonCashless.BusLayer
 
         private void StartBasicConsume<T>() where T : Event
         {
-            var factory = new ConnectionFactory() { HostName = "localhost", DispatchConsumersAsync = true };
+            var factory = new ConnectionFactory() { HostName = "localhost", DispatchConsumersAsync = true, Port = 15672 };
 
             var connection = factory.CreateConnection();
             var channel = connection.CreateModel();
@@ -104,7 +103,8 @@ namespace TDonCashless.BusLayer
                 await ProcessEvent(eventName, message).ConfigureAwait(false);
             }
             catch(Exception ex){
-                
+                Console.WriteLine(ex.Message);
+                throw ex;
             }
         }
 
