@@ -1,4 +1,4 @@
-namespace Domain.Commands
+namespace TDonCashless.Microservices.ValidateToken.Domain.Commands
 {
     public class InitiateValidateTokenCommand : ValidateTokenCommand
     {

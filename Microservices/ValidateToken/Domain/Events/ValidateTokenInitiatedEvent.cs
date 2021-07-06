@@ -1,6 +1,6 @@
 using TDonCashless.Domain.Core.Events;
 
-namespace Domain.Events
+namespace TDonCashless.Microservices.ValidateToken.Domain.Events
 {
     public class ValidateTokenInitiatedEvent : Event
     {

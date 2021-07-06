@@ -1,12 +1,13 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Domain.Commands;
-using Domain.Events;
+using TDonCashless.Microservices.ValidateToken.Domain.Commands;
+using TDonCashless.Microservices.ValidateToken.Domain.Events;
 using TDonCashless.Domain.Core.Bus;
+using MediatR;
 
-namespace Domain.CommandHandlers
+namespace TDonCashless.Microservices.ValidateToken.Domain.CommandHandlers
 {
-    public class ValidateTokenCommandHandler
+    public class ValidateTokenCommandHandler : IRequestHandler<ValidateTokenCommand, bool>
     {
         private readonly IEventBus _bus;
 

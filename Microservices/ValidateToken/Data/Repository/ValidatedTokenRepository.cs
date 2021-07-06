@@ -3,7 +3,7 @@ using TDonCashless.Microservices.ValidateToken.Data.Context;
 using TDonCashless.Microservices.ValidateToken.Domain.Interfaces;
 using TDonCashless.Microservices.ValidateToken.Domain.Models;
 
-namespace Data.Repository
+namespace TDonCashless.Microservices.ValidateToken.Data.Repository
 {
     public class ValidatedTokenRepository : IValidatedTokenRepository
     {
