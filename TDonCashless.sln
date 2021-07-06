@@ -5,10 +5,6 @@ VisualStudioVersion = 15.0.28307.1145
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TDonCashless.Services", "Services", "{36CFE829-5CE7-4C51-9467-A41E3F7E31FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDonCashless.Services.CreateCustomerCardAPI", "Services\TDonCashless.Services.CreateCustomerCardAPI\TDonCashless.Services.CreateCustomerCardAPI.csproj", "{D3DF0E54-7701-42F6-B819-F7A794179808}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDonCashless.Services.ValidateCustomerTokenAPI", "Services\TDonCashless.Services.ValidateCustomerTokenAPI\TDonCashless.Services.ValidateCustomerTokenAPI.csproj", "{B258C1C7-F035-42C7-9D48-21032272D181}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDonCashless.Domain.Core", "Domain\TDonCashless.Domain.Core.csproj", "{AB207A62-0D69-4DF3-B8D1-1E9B7E5B2521}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDonCashless.BusLayer", "BusLayer\TDonCashless.BusLayer.csproj", "{4A78ED35-D806-4147-B592-599EBCCE9D09}"
