@@ -9,6 +9,8 @@ using TDonCashless.Microservices.CreateCustomerCard.Data.Context;
 using TDonCashless.Microservices.CreateCustomerCard.Data.Repository;
 using TDonCashless.Microservices.CreateCustomerCard.Domain.CommandHandlers;
 using TDonCashless.Microservices.CreateCustomerCard.Domain.Commands;
+using TDonCashless.Microservices.CreateCustomerCard.Domain.EventHandlers;
+using TDonCashless.Microservices.CreateCustomerCard.Domain.Events;
 using TDonCashless.Microservices.CreateCustomerCard.Domain.Interfaces;
 using TDonCashless.Microservices.ValidateToken.Application.Interfaces;
 using TDonCashless.Microservices.ValidateToken.Application.Services;
@@ -35,9 +37,11 @@ namespace IOCLayer
 
             //Subscriptions
             services.AddTransient<ValidateTokenEventHandler>();
+            services.AddTransient<CreateCardEventHandler>();
 
             //Domain Events
             services.AddTransient<IEventHandler<ValidateTokenInitiatedEvent>, ValidateTokenEventHandler>();
+            services.AddTransient<IEventHandler<CreateCardInitiatedEvent>, CreateCardEventHandler>();
 
             //Domain Commands
             services.AddTransient<IRequestHandler<InitiateCreateCardCommand, bool>, CreateCardCommandHandler>();

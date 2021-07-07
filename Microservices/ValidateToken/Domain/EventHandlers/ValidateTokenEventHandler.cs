@@ -18,12 +18,13 @@ namespace TDonCashless.Microservices.ValidateToken.Domain.EventHandlers
 
         public Task HandleAsync(ValidateTokenInitiatedEvent @event)
         {
+            
+
             _validatedTokenRepository.InsertNewValidatedToken(new ValidatedToken(){
-                CardId = 0,
-                CustomerId = 0,
+                CardId = @event.CustomerCardId,
+                CustomerId = @event.CustomerId,
                 Valid = false,
-                ValidatedTime = DateTime.Now,
-                ValidatedTokenId = 0
+                ValidatedTime = DateTime.Now
             });
 
             return Task.CompletedTask;

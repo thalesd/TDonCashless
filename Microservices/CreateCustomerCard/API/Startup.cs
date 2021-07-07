@@ -42,7 +42,6 @@ namespace TDonCashless.Microservices.CreateCustomerCard.API
             
             services.AddMediatR(typeof(Startup));
 
-
             RegisterServices(services);
         }
 

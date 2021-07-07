@@ -15,12 +15,10 @@ namespace TDonCashless.Microservices.CreateCustomerCard.API.Controllers
     [ApiController]
     public class CreateCustomerCardController : ControllerBase
     {
-        private readonly ILogger<CreateCustomerCardController> _logger;
         private readonly ICustomerCardService _customerCardService;
 
-        public CreateCustomerCardController(ILogger<CreateCustomerCardController> logger, ICustomerCardService customerCardService)
+        public CreateCustomerCardController(ICustomerCardService customerCardService)
         {
-            _logger = logger;
             _customerCardService = customerCardService;
         }
 
@@ -30,10 +28,16 @@ namespace TDonCashless.Microservices.CreateCustomerCard.API.Controllers
             return Ok(_customerCardService.GetCustomerCards());
         }
 
+        [HttpGet]
+        public ActionResult<IEnumerable<CustomerCard>> Get([FromQuery] int customerCardId)
+        {
+            return Ok(_customerCardService.GetCustomerCardById(customerCardId));
+        }
+
         [HttpPost]
         public ActionResult<CustomerCardCreatedDTO> Post([FromBody] CustomerCardCreationDTO customerCard){
             _customerCardService.CreateCustomerCard(customerCard);
-            
+
             return Ok(customerCard);
         }
     }

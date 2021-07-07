@@ -81,7 +81,7 @@ namespace TDonCashless.BusLayer
 
         private void StartBasicConsume<T>() where T : Event
         {
-            var factory = new ConnectionFactory() { HostName = "localhost", DispatchConsumersAsync = true, Port = 15672 };
+            var factory = new ConnectionFactory() { HostName = "localhost", DispatchConsumersAsync = true };
 
             var connection = factory.CreateConnection();
             var channel = connection.CreateModel();
@@ -102,10 +102,12 @@ namespace TDonCashless.BusLayer
             var eventName = e.RoutingKey;
             var message = Encoding.UTF8.GetString(e.Body.ToArray());
 
-            try{
+            try
+            {
                 await ProcessEvent(eventName, message).ConfigureAwait(false);
             }
-            catch(Exception ex){
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.Message);
                 throw ex;
             }
@@ -113,14 +115,17 @@ namespace TDonCashless.BusLayer
 
         private async Task ProcessEvent(string eventName, string message)
         {
-            if(_handlers.ContainsKey(eventName)){
-                using(var scope = _serviceScopeFactory.CreateScope()){
+            if (_handlers.ContainsKey(eventName))
+            {
+                using (var scope = _serviceScopeFactory.CreateScope())
+                {
                     var subscriptions = _handlers[eventName];
-                    foreach(var subscription in subscriptions){
+                    foreach (var subscription in subscriptions)
+                    {
                         //var handler = Activator.CreateInstance(subscription);
                         var handler = scope.ServiceProvider.GetService(subscription);
 
-                        if(handler == null) continue;
+                        if (handler == null) continue;
 
                         var eventType = _eventTypes.SingleOrDefault(t => t.Name == eventName);
 
@@ -128,7 +133,7 @@ namespace TDonCashless.BusLayer
 
                         var concreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
 
-                        await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
+                        await (Task)concreteType.GetMethod("HandleAsync").Invoke(handler, new object[] { @event });
                     }
                 }
             }

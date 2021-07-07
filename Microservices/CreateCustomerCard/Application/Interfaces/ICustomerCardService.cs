@@ -9,5 +9,7 @@ namespace TDonCashless.Microservices.CreateCustomerCard.Application.Interfaces
         IEnumerable<CustomerCard> GetCustomerCards();
 
         void CreateCustomerCard(CustomerCardCreationDTO customerCardCreation);
+
+        CustomerCard GetCustomerCardById(int customerCardId);
     }
 }

@@ -31,6 +31,11 @@ namespace TDonCashless.Microservices.CreateCustomerCard.Application.Services
             _bus.SendCommand(initiateCreateCardCommand);
         }
 
+        public CustomerCard GetCustomerCardById(int customerCardId)
+        {
+            return _customerCardRepository.GetCustomerCardById(customerCardId);
+        }
+
         public IEnumerable<CustomerCard> GetCustomerCards()
         {
             return _customerCardRepository.GetCustomerCards();
