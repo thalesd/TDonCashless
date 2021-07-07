@@ -1,9 +1,12 @@
+using System.Collections.Generic;
 using TDonCashless.Microservices.ValidateToken.Application.DTOs;
+using TDonCashless.Microservices.ValidateToken.Domain.Models;
 
 namespace TDonCashless.Microservices.ValidateToken.Application.Interfaces
 {
     public interface IValidateTokenService
     {
-        ValidatedTokenDTO ValidateToken(ValidateTokenDTO validateToken);
+        IEnumerable<ValidatedToken> GetValidatedTokenHistory();
+        void ValidateToken(ValidateTokenDTO validateToken);
     }
 }

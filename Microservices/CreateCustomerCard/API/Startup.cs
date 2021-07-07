@@ -1,3 +1,4 @@
+using System;
 using IOCLayer;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -7,7 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using TDonCashless.Domain.Core.Bus;
 using TDonCashless.Microservices.CreateCustomerCard.Data.Context;
+using TDonCashless.Microservices.CreateCustomerCard.Domain.Events;
 
 namespace TDonCashless.Microservices.CreateCustomerCard.API
 {
@@ -67,6 +70,17 @@ namespace TDonCashless.Microservices.CreateCustomerCard.API
             {
                 endpoints.MapControllers();
             });
+
+            ConfigureEventBus(app);
+        }
+
+        private void ConfigureEventBus(IApplicationBuilder app)
+        {
+            var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
+
+            eventBus.Subscribe<CreateCardInitiatedEvent, CreateCardEventHandler>();
+
+            throw new NotImplementedException();
         }
     }
 }

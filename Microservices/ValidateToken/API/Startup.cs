@@ -7,7 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using TDonCashless.Domain.Core.Bus;
 using TDonCashless.Microservices.ValidateToken.Data.Context;
+using TDonCashless.Microservices.ValidateToken.Domain.EventHandlers;
+using TDonCashless.Microservices.ValidateToken.Domain.Events;
 
 namespace TDonCashless.Microservices.ValidateToken.API
 {
@@ -39,7 +42,6 @@ namespace TDonCashless.Microservices.ValidateToken.API
 
             services.AddMediatR(typeof(Startup));
 
-
             RegisterServices(services);
         }
 
@@ -68,6 +70,15 @@ namespace TDonCashless.Microservices.ValidateToken.API
             {
                 endpoints.MapControllers();
             });
+
+            ConfigureEventBus(app);
+        }
+
+        private void ConfigureEventBus(IApplicationBuilder app)
+        {
+            var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
+
+            eventBus.Subscribe<ValidateTokenInitiatedEvent, ValidateTokenEventHandler>();
         }
     }
 }

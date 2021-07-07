@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using TDonCashless.BusLayer;
 using TDonCashless.Domain.Core.Bus;
+using TDonCashless.Domain.Core.Events;
 using TDonCashless.Microservices.CreateCustomerCard.Application.Interfaces;
 using TDonCashless.Microservices.CreateCustomerCard.Application.Services;
 using TDonCashless.Microservices.CreateCustomerCard.Data.Context;
@@ -15,6 +16,8 @@ using TDonCashless.Microservices.ValidateToken.Data.Context;
 using TDonCashless.Microservices.ValidateToken.Data.Repository;
 using TDonCashless.Microservices.ValidateToken.Domain.CommandHandlers;
 using TDonCashless.Microservices.ValidateToken.Domain.Commands;
+using TDonCashless.Microservices.ValidateToken.Domain.EventHandlers;
+using TDonCashless.Microservices.ValidateToken.Domain.Events;
 using TDonCashless.Microservices.ValidateToken.Domain.Interfaces;
 
 namespace IOCLayer
@@ -26,7 +29,10 @@ namespace IOCLayer
             //DomainBus
             services.AddTransient<IEventBus, RabbitMQBus>();
 
-            //Domain CreateCustomerCard Commands
+            //Domain Events
+            services.AddTransient<IEventHandler<ValidateTokenInitiatedEvent>, ValidateTokenEventHandler>();
+
+            //Domain Commands
             services.AddTransient<IRequestHandler<InitiateCreateCardCommand, bool>, CreateCardCommandHandler>();
             services.AddTransient<IRequestHandler<InitiateValidateTokenCommand, bool>, ValidateTokenCommandHandler>();
 
