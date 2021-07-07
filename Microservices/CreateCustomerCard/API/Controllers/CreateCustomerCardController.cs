@@ -28,8 +28,8 @@ namespace TDonCashless.Microservices.CreateCustomerCard.API.Controllers
             return Ok(_customerCardService.GetCustomerCards());
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<CustomerCard>> Get([FromQuery] int customerCardId)
+        [HttpGet("{customerCardId}")]
+        public ActionResult<IEnumerable<CustomerCard>> Get([FromRoute] int customerCardId)
         {
             return Ok(_customerCardService.GetCustomerCardById(customerCardId));
         }

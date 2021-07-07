@@ -19,17 +19,14 @@ namespace TDonCashless.Microservices.CreateCustomerCard.Data.Repository
         public long CreateCardToken(long cardNumber, int cvv)
         {
             var cardNumberAsString = cardNumber.ToString();
-            var lastFourDigits = cardNumberAsString.ToString().Substring(cardNumberAsString.Length - 5, 4);
+            var lastFourDigits = cardNumberAsString.Substring(cardNumberAsString.Length - 4, 4);
 
             var numberOfRotations = cvv;
-            var numberArray = new int[4];
+            int[] numberArray = new int[4];
 
-            int i = 0;
-            foreach (var number in lastFourDigits)
+            for (int i = 0; i < 4; i++)
             {
-                numberArray[i] = Convert.ToInt32(number);
-
-                i++;
+                Int32.TryParse(Convert.ToString(lastFourDigits[i]), out numberArray[i]);
             }
 
             return RightCircularRotationRecursive(numberArray, numberOfRotations);
