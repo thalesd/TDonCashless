@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using TDonCashless.Domain.Core.Bus;
 using TDonCashless.Microservices.CreateCustomerCard.Data.Context;
+using TDonCashless.Microservices.CreateCustomerCard.Domain.EventHandlers;
 using TDonCashless.Microservices.CreateCustomerCard.Domain.Events;
 
 namespace TDonCashless.Microservices.CreateCustomerCard.API
@@ -79,8 +80,6 @@ namespace TDonCashless.Microservices.CreateCustomerCard.API
             var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
 
             eventBus.Subscribe<CreateCardInitiatedEvent, CreateCardEventHandler>();
-
-            throw new NotImplementedException();
         }
     }
 }
