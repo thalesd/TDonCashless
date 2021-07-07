@@ -27,7 +27,14 @@ namespace IOCLayer
         public static void RegisterServices(IServiceCollection services)
         {
             //DomainBus
-            services.AddTransient<IEventBus, RabbitMQBus>();
+            services.AddSingleton<IEventBus, RabbitMQBus>(sp =>
+            {
+                var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
+                return new RabbitMQBus(sp.GetService<IMediator>(), scopeFactory);
+            });
+
+            //Subscriptions
+            services.AddTransient<ValidateTokenEventHandler>();
 
             //Domain Events
             services.AddTransient<IEventHandler<ValidateTokenInitiatedEvent>, ValidateTokenEventHandler>();
