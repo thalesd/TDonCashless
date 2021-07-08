@@ -7,15 +7,15 @@ using TDonCashless.Microservices.CreateCustomerCard.Domain.Models;
 
 namespace TDonCashless.Microservices.CreateCustomerCard.Domain.EventHandlers
 {
-    public class CreateCardEventHandler : IEventHandler<CreateCardInitiatedEvent>
+    public class LogCardCreationInitiatedEventHandler : IEventHandler<LogCardCreationInitiatedEvent>
     {
         private readonly ICustomerCardRepository _customerCardRepository;
-        public CreateCardEventHandler(ICustomerCardRepository customerCardRepository){
+        public LogCardCreationInitiatedEventHandler(ICustomerCardRepository customerCardRepository){
             _customerCardRepository = customerCardRepository;
         }
-        public Task HandleAsync(CreateCardInitiatedEvent @event)
+        public Task HandleAsync(LogCardCreationInitiatedEvent @event)
         {
-            _customerCardRepository.InsertNewCustomerCard(new CustomerCard(){
+            _customerCardRepository.InsertNewLogCustomerCardCreation(new CustomerCard(){
                 CardNumber = @event.CardNumber,
                 CustomerId = @event.CustomerId,
                 CVV = @event.CVV,

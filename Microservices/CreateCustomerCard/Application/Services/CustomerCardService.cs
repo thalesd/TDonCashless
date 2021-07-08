@@ -23,23 +23,24 @@ namespace TDonCashless.Microservices.CreateCustomerCard.Application.Services
 
         public CustomerCard CreateCustomerCard(CustomerCardCreationDTO customerCardCreation)
         {
-            var createdCard = new CustomerCard(){
+            var createdCard = _customerCardRepository.InsertNewCustomerCard(new CustomerCard()
+            {
                 CardNumber = customerCardCreation.CardNumber,
                 CustomerId = customerCardCreation.CustomerId,
                 CVV = customerCardCreation.CVV,
                 RegistrationDate = DateTime.Now.ToUniversalTime(),
                 Token = _customerCardRepository.CreateCardToken(customerCardCreation.CardNumber, customerCardCreation.CVV)
-            };
+            });
 
-            var initiateCreateCardCommand = new InitiateCreateCardCommand(
-                    createdCard.CustomerId,
-                    createdCard.CardNumber,
-                    createdCard.CVV,
-                    createdCard.RegistrationDate,
-                    createdCard.Token
-                );
+            var initiateLogCardCreationCommand = new InitiateLogCardCreationCommand(
+                createdCard.CustomerId,
+                createdCard.CardNumber,
+                createdCard.CVV,
+                createdCard.RegistrationDate,
+                createdCard.Token
+            );
 
-            _bus.SendCommand(initiateCreateCardCommand);
+            _bus.SendCommand(initiateLogCardCreationCommand);
 
             return createdCard;
         }
@@ -58,9 +59,9 @@ namespace TDonCashless.Microservices.CreateCustomerCard.Application.Services
         {
             var customerCard = _customerCardRepository.GetCustomerCardById(revalidateCustomerCard.CustomerCardId);
 
-            if(customerCard.RegistrationDate < DateTime.Now.AddMinutes(-30)) return Task.FromResult(false);
+            if (customerCard.RegistrationDate < DateTime.Now.ToUniversalTime().AddMinutes(-30)) return Task.FromResult(false);
 
-            if(revalidateCustomerCard.CustomerId != customerCard.CustomerId) return Task.FromResult(false);
+            if (revalidateCustomerCard.CustomerId != customerCard.CustomerId) return Task.FromResult(false);
 
             Console.WriteLine(customerCard.CardNumber);
 

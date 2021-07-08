@@ -32,19 +32,23 @@ namespace TDonCashless.Microservices.CreateCustomerCard.Data.Repository
             return RightCircularRotationRecursive(numberArray, numberOfRotations);
         }
 
-        private long RightCircularRotationRecursive(int[] numberArray, int rotations){
-            if(rotations > 0){
+        private long RightCircularRotationRecursive(int[] numberArray, int rotations)
+        {
+            if (rotations > 0)
+            {
                 int temp = numberArray[0];
 
-                numberArray[0] = numberArray[numberArray.Length-1];
-                numberArray[numberArray.Length-1] = temp;
+                numberArray[0] = numberArray[numberArray.Length - 1];
+                numberArray[numberArray.Length - 1] = temp;
 
-                return RightCircularRotationRecursive(numberArray, rotations-1);
+                return RightCircularRotationRecursive(numberArray, rotations - 1);
             }
-            else {
+            else
+            {
                 var result = "";
 
-                foreach(var number in numberArray){
+                foreach (var number in numberArray)
+                {
                     result += number.ToString();
                 }
 
@@ -57,7 +61,8 @@ namespace TDonCashless.Microservices.CreateCustomerCard.Data.Repository
             return _ctx.CustomerCards;
         }
 
-        public CustomerCard InsertNewCustomerCard(CustomerCard card){
+        public CustomerCard InsertNewCustomerCard(CustomerCard card)
+        {
             _ctx.CustomerCards.Add(card);
 
             _ctx.SaveChanges();
@@ -68,6 +73,25 @@ namespace TDonCashless.Microservices.CreateCustomerCard.Data.Repository
         public CustomerCard GetCustomerCardById(int customerCardId)
         {
             return _ctx.CustomerCards.Single(cc => cc.CustomerCardId == customerCardId);
+        }
+
+        public CustomerCardLog InsertNewLogCustomerCardCreation(CustomerCard newCard)
+        {
+            var logRecord = new CustomerCardLog()
+            {
+                CustomerCardId = newCard.CustomerCardId,
+                CustomerId = newCard.CustomerId,
+                CardNumber = newCard.CardNumber,
+                CVV = newCard.CVV,
+                RegistrationDate = newCard.RegistrationDate,
+                Token = newCard.Token
+            };
+
+            _ctx.Add(logRecord);
+
+            _ctx.SaveChanges();
+
+            return logRecord;
         }
     }
 }

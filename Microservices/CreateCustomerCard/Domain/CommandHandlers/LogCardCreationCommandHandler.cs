@@ -8,19 +8,19 @@ using TDonCashless.Microservices.CreateCustomerCard.Domain.Events;
 
 namespace TDonCashless.Microservices.CreateCustomerCard.Domain.CommandHandlers
 {
-    public class CreateCardCommandHandler : IRequestHandler<CreateCardCommand, bool>
+    public class LogCardCreationCommandHandler : IRequestHandler<LogCardCreationCommand, bool>
     {
         private readonly IEventBus _bus;
 
-        public CreateCardCommandHandler(IEventBus bus)
+        public LogCardCreationCommandHandler(IEventBus bus)
         {
             _bus = bus;
         }
 
-        public Task<bool> Handle(CreateCardCommand request, CancellationToken cancellationToken)
+        public Task<bool> Handle(LogCardCreationCommand request, CancellationToken cancellationToken)
         {
             //publish event to RabbitMQ
-            _bus.Publish(new CreateCardInitiatedEvent(request.CustomerId, request.CardNumber, request.CVV, request.RegistrationDate, request.Token));
+            _bus.Publish(new LogCardCreationInitiatedEvent(request.CustomerId, request.CardNumber, request.CVV, request.RegistrationDate, request.Token));
 
             return Task.FromResult(true);
         }

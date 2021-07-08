@@ -10,5 +10,7 @@ namespace TDonCashless.Microservices.CreateCustomerCard.Data.Context
         }
 
         public DbSet<CustomerCard> CustomerCards { get; set; }
+
+        public DbSet<CustomerCardLog> CustomerCardLogs {get; set;}
     }
 }

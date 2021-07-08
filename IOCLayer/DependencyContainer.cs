@@ -37,14 +37,14 @@ namespace IOCLayer
 
             //Subscriptions
             services.AddTransient<InsertValidatedTokenEventHandler>();
-            services.AddTransient<CreateCardEventHandler>();
+            services.AddTransient<LogCardCreationInitiatedEventHandler>();
 
             //Domain Events
             services.AddTransient<IEventHandler<InsertValidatedTokenInitiatedEvent>, InsertValidatedTokenEventHandler>();
-            services.AddTransient<IEventHandler<CreateCardInitiatedEvent>, CreateCardEventHandler>();
+            services.AddTransient<IEventHandler<LogCardCreationInitiatedEvent>, LogCardCreationInitiatedEventHandler>();
 
             //Domain Commands
-            services.AddTransient<IRequestHandler<InitiateCreateCardCommand, bool>, CreateCardCommandHandler>();
+            services.AddTransient<IRequestHandler<InitiateLogCardCreationCommand, bool>, LogCardCreationCommandHandler>();
             services.AddTransient<IRequestHandler<InitiateInsertValidatedTokenCommand, bool>, InsertValidatedTokenCommandHandler>();
 
             //Application Layer

@@ -3,7 +3,7 @@ using TDonCashless.Domain.Core.Events;
 
 namespace TDonCashless.Microservices.CreateCustomerCard.Domain.Events
 {
-    public class CreateCardInitiatedEvent : Event
+    public class LogCardCreationInitiatedEvent : Event
     {
         public int CustomerId { get; private set; }
         public long CardNumber { get; private set; }
@@ -11,7 +11,7 @@ namespace TDonCashless.Microservices.CreateCustomerCard.Domain.Events
         public DateTime RegistrationDate {get; private set;}
         public long Token {get; private set;}
 
-        public CreateCardInitiatedEvent(int customerId, long cardNumber, int cvv, DateTime registrationDate, long token)
+        public LogCardCreationInitiatedEvent(int customerId, long cardNumber, int cvv, DateTime registrationDate, long token)
         {
             this.CustomerId = customerId;
             this.CardNumber = cardNumber;

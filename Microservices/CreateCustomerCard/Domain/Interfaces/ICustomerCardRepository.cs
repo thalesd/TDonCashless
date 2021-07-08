@@ -9,6 +9,8 @@ namespace TDonCashless.Microservices.CreateCustomerCard.Domain.Interfaces
 
         CustomerCard InsertNewCustomerCard(CustomerCard newCard);
 
+        CustomerCardLog InsertNewLogCustomerCardCreation(CustomerCard newCard);
+
         long CreateCardToken(long cardNumber, int cvv);
 
         CustomerCard GetCustomerCardById(int customerCardId);
