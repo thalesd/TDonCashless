@@ -36,9 +36,9 @@ namespace TDonCashless.Microservices.CreateCustomerCard.API.Controllers
 
         [HttpPost]
         public ActionResult<CustomerCardCreatedDTO> Post([FromBody] CustomerCardCreationDTO customerCard){
-            _customerCardService.CreateCustomerCard(customerCard);
+            var newCustomerCard = _customerCardService.CreateCustomerCard(customerCard);
 
-            return Ok(customerCard);
+            return Ok(newCustomerCard);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace TdonCashless.Microservices.Gateway.API.Services
 
         public async Task<bool> ValidateCard(RevalidateCustomerCardTokenDTO revalidateCustomerCard)
         {
-            var uri = "https://localhost:5003/api/RevalidateCustomerCard";
+            var uri = "https://localhost:5001/api/RevalidateCustomerCardToken";
             var content = new StringContent(JsonConvert.SerializeObject(revalidateCustomerCard), System.Text.Encoding.UTF8, "application/json");
 
             var response = await _apiClient.PostAsync(uri, content);

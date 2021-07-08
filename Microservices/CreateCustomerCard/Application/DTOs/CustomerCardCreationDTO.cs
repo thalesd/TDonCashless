@@ -1,3 +1,5 @@
+using System;
+
 namespace TDonCashless.Microservices.CreateCustomerCard.Application.DTOs
 {
     public class CustomerCardCreationDTO
