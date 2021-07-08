@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TDonCashless.Microservices.ValidateToken.Data.Context;
 
 namespace TDonCashless.Microservices.ValidateToken.API.Migrations
 {
     [DbContext(typeof(ValidatedTokenDbContext))]
-    partial class ValidatedTokenDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210708202036_RestructuresValidatedTokenTable")]
+    partial class RestructuresValidatedTokenTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,6 +39,9 @@ namespace TDonCashless.Microservices.ValidateToken.API.Migrations
 
                     b.Property<long>("Token")
                         .HasColumnType("bigint");
+
+                    b.Property<DateTime>("TokenCreationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("Valid")
                         .HasColumnType("bit");
