@@ -78,7 +78,7 @@ namespace TDonCashless.Microservices.CreateCustomerCard.API
         {
             var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
 
-            eventBus.Subscribe<CreateCardInitiatedEvent, CreateCardEventHandler>();
+            eventBus.Subscribe<LogCardCreationInitiatedEvent, LogCardCreationInitiatedEventHandler>();
         }
     }
 }

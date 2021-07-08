@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TDonCashless.Microservices.CreateCustomerCard.Data.Context;
 
 namespace TDonCashless.Microservices.CreateCustomerCard.API.Migrations
 {
     [DbContext(typeof(CustomerCardDbContext))]
-    partial class CustomerCardDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210708170027_IncludeCustomerCardLogs")]
+    partial class IncludeCustomerCardLogs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
