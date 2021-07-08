@@ -25,5 +25,14 @@ namespace TdonCashless.Microservices.Gateway.API.Services
 
             return JsonConvert.DeserializeObject<bool>(responseBody);
         }
+
+        public async void LogValidateCardAttempt(ValidateCardDTO validateCardDto)
+        {
+            var uriVt = "https://localhost:5003/api/ValidatedToken";
+            var contentVt = new StringContent(JsonConvert.SerializeObject(validateCardDto), System.Text.Encoding.UTF8, "application/json");
+
+            var responseVt = await _apiClient.PostAsync(uriVt, contentVt);
+            responseVt.EnsureSuccessStatusCode();
+        }
     }
 }

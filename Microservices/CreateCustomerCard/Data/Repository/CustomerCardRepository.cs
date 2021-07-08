@@ -36,10 +36,14 @@ namespace TDonCashless.Microservices.CreateCustomerCard.Data.Repository
         {
             if (rotations > 0)
             {
-                int temp = numberArray[0];
+                int temp = 0;
 
-                numberArray[0] = numberArray[numberArray.Length - 1];
-                numberArray[numberArray.Length - 1] = temp;
+                for (int i = 0; i < numberArray.Length - 1; i++)
+                {    
+                    temp = numberArray[0];
+                    numberArray[0] = numberArray[i + 1];
+                    numberArray[i + 1] = temp;
+                }
 
                 return RightCircularRotationRecursive(numberArray, rotations - 1);
             }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TDonCashless.Domain.Core.Bus;
 using TDonCashless.Microservices.ValidateToken.Application.DTOs;
 using TDonCashless.Microservices.ValidateToken.Application.Interfaces;
@@ -23,16 +24,17 @@ namespace TDonCashless.Microservices.ValidateToken.Application.Services
             return _validatedTokenRepository.GetValidatedTokens();
         }
 
-        public void InsertValidatedToken(InsertValidatedTokenDTO insertValidatedToken)
+        public async Task InsertValidatedToken(InsertValidatedTokenDTO insertValidatedToken)
         {
             var initiateValidateTokenCommand = new InitiateInsertValidatedTokenCommand(
                     insertValidatedToken.CustomerId,
                     insertValidatedToken.CustomerCardId,
                     insertValidatedToken.Token,
-                    insertValidatedToken.CVV
+                    insertValidatedToken.CVV,
+                    insertValidatedToken.Validated
                 );
 
-            _bus.SendCommand(initiateValidateTokenCommand);
+            await _bus.SendCommand(initiateValidateTokenCommand);
         }
     }
 }

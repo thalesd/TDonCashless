@@ -6,5 +6,7 @@ namespace TdonCashless.Microservices.Gateway.API.Services
     public interface IValidatedTokenService
     {
         Task<bool> ValidateCard(RevalidateCustomerCardTokenDTO revalidateCustomerCard);
+
+        void LogValidateCardAttempt(ValidateCardDTO validateCardDto);
     }
 }

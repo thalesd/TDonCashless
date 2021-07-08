@@ -1,3 +1,5 @@
+using System;
+
 namespace TDonCashless.Microservices.ValidateToken.Application.DTOs
 {
     public class InsertValidatedTokenDTO
@@ -6,5 +8,6 @@ namespace TDonCashless.Microservices.ValidateToken.Application.DTOs
         public int CustomerCardId {get; set;}
         public long Token {get; set;}
         public int CVV {get; set;}
+        public bool Validated {get; set;}
     }
 }

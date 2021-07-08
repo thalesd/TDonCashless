@@ -1,3 +1,5 @@
+using System;
+
 namespace TdonCashless.Microservices.Gateway.API.DTOs
 {
     public class ValidateCardDTO
@@ -6,5 +8,6 @@ namespace TdonCashless.Microservices.Gateway.API.DTOs
         public int CustomerCardId {get; set;}
         public long Token {get; set;}
         public int CVV {get; set;}
+        public bool Validated {get; set;}
     }
 }

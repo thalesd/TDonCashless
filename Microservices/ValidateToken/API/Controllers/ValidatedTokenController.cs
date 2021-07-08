@@ -27,10 +27,8 @@ namespace TDonCashless.Microservices.ValidateToken.API.Controllers
         }
 
         [HttpPost]
-        public Task<bool> Post([FromBody] InsertValidatedTokenDTO validateToken){
-            _validatedTokenService.InsertValidatedToken(validateToken);
-            
-            return Task.FromResult(false);
+        public async void Post([FromBody] InsertValidatedTokenDTO validateToken){
+            await _validatedTokenService.InsertValidatedToken(validateToken);
         }
     }
 }

@@ -46,7 +46,7 @@ namespace TDonCashless.Microservices.CreateCustomerCard.API
                         Name = "Thales Donizetti Marukawa de Oliveira",
                         Email = "tdonizetti@tdonsoft.com",
                         Url = new Uri("https://github.com/thalesd"),
-                    },
+                    }
                 });
             });
 

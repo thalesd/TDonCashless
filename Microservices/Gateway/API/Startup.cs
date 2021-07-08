@@ -31,7 +31,18 @@ namespace TdonCashless.Microservices.Gateway.API
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TdonCashless.Microservices.Gateway.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "TDonCashless.Microservices.Gateway.API",
+                    Version = "v1",
+                    Description = "A proxy gateway to consume a microservice approach to cashless authentication using recursive right circular rotation as the token encryption.",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Thales Donizetti Marukawa de Oliveira",
+                        Email = "tdonizetti@tdonsoft.com",
+                        Url = new Uri("https://github.com/thalesd"),
+                    }
+                });
             });
 
             services.AddHttpClient<ICreateCustomerCardService, CreateCustomerCardService>();
@@ -45,7 +56,11 @@ namespace TdonCashless.Microservices.Gateway.API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TdonCashless.Microservices.Gateway.API v1"));
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "TdonCashless.Microservices.Gateway.API v1");
+                    c.RoutePrefix = string.Empty;
+                });
             }
 
             app.UseHttpsRedirection();

@@ -7,7 +7,10 @@ namespace TDonCashless.Microservices.ValidateToken.Domain.Models
         public int ValidatedTokenId {get; set;}
         public int CustomerId {get; set;}
         public int CardId {get; set;}
+        public long Token {get; set;}
+        public int CVV {get; set;}
+        public DateTime TokenCreationDate {get; set;}
         public bool Valid {get; set;}
-        public DateTime ValidatedTime {get; set;}
+        public DateTime ValidatedLogTime {get; set;}
     }
 }
