@@ -27,19 +27,31 @@ namespace TDonCashless.Microservices.CreateCustomerCard.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CustomerCardDbContext>(options => {
+            services.AddDbContext<CustomerCardDbContext>(options =>
+            {
                 options.UseSqlServer(Configuration.GetConnectionString("CustomerCardDbConnection"), optionsBuilder => optionsBuilder.MigrationsAssembly("TDonCashless.Microservices.CreateCustomerCard.API"));
             });
 
             services.AddControllers();
-            
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TDonCashless.Microservices.CreateCustomerCard.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "TDonCashless.Microservices.CreateCustomerCard.API",
+                    Version = "v1",
+                    Description = "A Microservice approach to cashless authentication using recursive right circular rotation as the token encryption.",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Thales Donizetti Marukawa de Oliveira",
+                        Email = "tdonizetti@tdonsoft.com",
+                        Url = new Uri("https://github.com/thalesd"),
+                    },
+                });
             });
 
             services.AddCors();
-            
+
             services.AddMediatR(typeof(Startup));
 
             RegisterServices(services);
@@ -57,7 +69,10 @@ namespace TDonCashless.Microservices.CreateCustomerCard.API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TDonCashless.Microservices.CreateCustomerCard.API v1"));
+                app.UseSwaggerUI(c => {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "TDonCashless.Microservices.CreateCustomerCard.API v1");
+                    c.RoutePrefix = string.Empty;
+                });
             }
 
             app.UseHttpsRedirection();

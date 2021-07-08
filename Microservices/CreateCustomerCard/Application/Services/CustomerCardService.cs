@@ -65,7 +65,9 @@ namespace TDonCashless.Microservices.CreateCustomerCard.Application.Services
 
             Console.WriteLine(customerCard.CardNumber);
 
-            return Task.FromResult(revalidateCustomerCard.Token == _customerCardRepository.CreateCardToken(customerCard.CardNumber, revalidateCustomerCard.CVV));
+            var regeneratedToken = _customerCardRepository.CreateCardToken(customerCard.CardNumber, revalidateCustomerCard.CVV);
+
+            return Task.FromResult(revalidateCustomerCard.Token == regeneratedToken);
         }
     }
 }

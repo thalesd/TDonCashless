@@ -20,11 +20,9 @@ namespace TdonCashless.Microservices.Gateway.API.Controllers
         }
 
         [HttpPost]
-        public async Task<bool> Post([FromBody] RevalidateCustomerCardTokenDTO revalidateCustomerCardDto)
+        public async Task<JsonResult> Post([FromBody] RevalidateCustomerCardTokenDTO revalidateCustomerCardDto)
         {
-            await _validateTokenService.ValidateCard(revalidateCustomerCardDto);
-
-            return false;
+            return new JsonResult(new { Validated = await _validateTokenService.ValidateCard(revalidateCustomerCardDto)});
         }
     }
 }
