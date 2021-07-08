@@ -78,7 +78,7 @@ namespace TDonCashless.Microservices.ValidateToken.API
         {
             var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
 
-            eventBus.Subscribe<ValidateTokenInitiatedEvent, ValidateTokenEventHandler>();
+            eventBus.Subscribe<InsertValidatedTokenInitiatedEvent, InsertValidatedTokenEventHandler>();
         }
     }
 }

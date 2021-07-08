@@ -36,20 +36,20 @@ namespace IOCLayer
             });
 
             //Subscriptions
-            services.AddTransient<ValidateTokenEventHandler>();
+            services.AddTransient<InsertValidatedTokenEventHandler>();
             services.AddTransient<CreateCardEventHandler>();
 
             //Domain Events
-            services.AddTransient<IEventHandler<ValidateTokenInitiatedEvent>, ValidateTokenEventHandler>();
+            services.AddTransient<IEventHandler<InsertValidatedTokenInitiatedEvent>, InsertValidatedTokenEventHandler>();
             services.AddTransient<IEventHandler<CreateCardInitiatedEvent>, CreateCardEventHandler>();
 
             //Domain Commands
             services.AddTransient<IRequestHandler<InitiateCreateCardCommand, bool>, CreateCardCommandHandler>();
-            services.AddTransient<IRequestHandler<InitiateValidateTokenCommand, bool>, ValidateTokenCommandHandler>();
+            services.AddTransient<IRequestHandler<InitiateInsertValidatedTokenCommand, bool>, InsertValidatedTokenCommandHandler>();
 
             //Application Layer
             services.AddTransient<ICustomerCardService, CustomerCardService>();
-            services.AddTransient<IValidateTokenService, ValidateTokenService>();
+            services.AddTransient<IValidatedTokenService, ValidatedTokenService>();
 
             //Data Layer
             services.AddTransient<ICustomerCardRepository, CustomerCardRepository>();

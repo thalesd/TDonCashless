@@ -7,19 +7,19 @@ using MediatR;
 
 namespace TDonCashless.Microservices.ValidateToken.Domain.CommandHandlers
 {
-    public class ValidateTokenCommandHandler : IRequestHandler<ValidateTokenCommand, bool>
+    public class InsertValidatedTokenCommandHandler : IRequestHandler<InsertValidatedTokenCommand, bool>
     {
         private readonly IEventBus _bus;
 
-        public ValidateTokenCommandHandler(IEventBus bus)
+        public InsertValidatedTokenCommandHandler(IEventBus bus)
         {
             _bus = bus;
         }
 
-        public Task<bool> Handle(ValidateTokenCommand request, CancellationToken cancellationToken)
+        public Task<bool> Handle(InsertValidatedTokenCommand request, CancellationToken cancellationToken)
         {
             //publish event to RabbitMQ
-            _bus.Publish(new ValidateTokenInitiatedEvent(request.CustomerId, request.CustomerCardId, request.Token, request.CVV));
+            _bus.Publish(new InsertValidatedTokenInitiatedEvent(request.CustomerId, request.CustomerCardId, request.Token, request.CVV));
 
             return Task.FromResult(true);
         }

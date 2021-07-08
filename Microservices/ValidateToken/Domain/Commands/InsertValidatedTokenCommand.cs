@@ -2,7 +2,7 @@ using TDonCashless.Domain.Core.Commands;
 
 namespace TDonCashless.Microservices.ValidateToken.Domain.Commands
 {
-    public class ValidateTokenCommand : Command
+    public class InsertValidatedTokenCommand : Command
     {
         public int CustomerId { get; protected set; }
         public int CustomerCardId { get; protected set; }

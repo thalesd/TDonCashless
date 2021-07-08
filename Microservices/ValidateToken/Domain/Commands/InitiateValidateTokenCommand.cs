@@ -1,8 +1,8 @@
 namespace TDonCashless.Microservices.ValidateToken.Domain.Commands
 {
-    public class InitiateValidateTokenCommand : ValidateTokenCommand
+    public class InitiateInsertValidatedTokenCommand : InsertValidatedTokenCommand
     {
-        public InitiateValidateTokenCommand(int customerId, int customerCardId, long token, int cvv)
+        public InitiateInsertValidatedTokenCommand(int customerId, int customerCardId, long token, int cvv)
         {
             this.CustomerId = customerId;
             this.CustomerCardId = customerCardId;

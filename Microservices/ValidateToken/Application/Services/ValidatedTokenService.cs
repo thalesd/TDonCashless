@@ -8,12 +8,12 @@ using TDonCashless.Microservices.ValidateToken.Domain.Models;
 
 namespace TDonCashless.Microservices.ValidateToken.Application.Services
 {
-    public class ValidateTokenService : IValidateTokenService
+    public class ValidatedTokenService : IValidatedTokenService
     {
         private readonly IValidatedTokenRepository _validatedTokenRepository;
         private readonly IEventBus _bus;
 
-        public ValidateTokenService(IValidatedTokenRepository validatedTokenRepository, IEventBus bus)
+        public ValidatedTokenService(IValidatedTokenRepository validatedTokenRepository, IEventBus bus)
         {
             _validatedTokenRepository = validatedTokenRepository;
             _bus = bus;
@@ -23,13 +23,13 @@ namespace TDonCashless.Microservices.ValidateToken.Application.Services
             return _validatedTokenRepository.GetValidatedTokens();
         }
 
-        public void ValidateToken(ValidateTokenDTO validateToken)
+        public void InsertValidatedToken(InsertValidatedTokenDTO insertValidatedToken)
         {
-            var initiateValidateTokenCommand = new InitiateValidateTokenCommand(
-                    validateToken.CustomerId,
-                    validateToken.CustomerCardId,
-                    validateToken.Token,
-                    validateToken.CVV
+            var initiateValidateTokenCommand = new InitiateInsertValidatedTokenCommand(
+                    insertValidatedToken.CustomerId,
+                    insertValidatedToken.CustomerCardId,
+                    insertValidatedToken.Token,
+                    insertValidatedToken.CVV
                 );
 
             _bus.SendCommand(initiateValidateTokenCommand);

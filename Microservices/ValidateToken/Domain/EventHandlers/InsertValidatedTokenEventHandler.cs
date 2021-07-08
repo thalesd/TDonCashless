@@ -7,19 +7,17 @@ using TDonCashless.Microservices.ValidateToken.Domain.Models;
 
 namespace TDonCashless.Microservices.ValidateToken.Domain.EventHandlers
 {
-    public class ValidateTokenEventHandler : IEventHandler<ValidateTokenInitiatedEvent>
+    public class InsertValidatedTokenEventHandler : IEventHandler<InsertValidatedTokenInitiatedEvent>
     {
         private readonly IValidatedTokenRepository _validatedTokenRepository;
         
-        public ValidateTokenEventHandler(IValidatedTokenRepository validatedTokenRepository)
+        public InsertValidatedTokenEventHandler(IValidatedTokenRepository validatedTokenRepository)
         {
             _validatedTokenRepository = validatedTokenRepository;
         }
 
-        public Task HandleAsync(ValidateTokenInitiatedEvent @event)
+        public Task HandleAsync(InsertValidatedTokenInitiatedEvent @event)
         {
-            
-
             _validatedTokenRepository.InsertNewValidatedToken(new ValidatedToken(){
                 CardId = @event.CustomerCardId,
                 CustomerId = @event.CustomerId,

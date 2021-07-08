@@ -12,25 +12,25 @@ namespace TDonCashless.Microservices.ValidateToken.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValidateTokenController : ControllerBase
+    public class ValidatedTokenController : ControllerBase
     {
-        private readonly IValidateTokenService _validateTokenService;
+        private readonly IValidatedTokenService _validatedTokenService;
 
-        public ValidateTokenController(IValidateTokenService validateTokenService)
+        public ValidatedTokenController(IValidatedTokenService validatedTokenService)
         {
-            _validateTokenService = validateTokenService;
+            _validatedTokenService = validatedTokenService;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<ValidatedToken>> Get(){
-            return Ok(_validateTokenService.GetValidatedTokenHistory());
+            return Ok(_validatedTokenService.GetValidatedTokenHistory());
         }
 
         [HttpPost]
-        public ActionResult<ValidatedTokenDTO> Post([FromBody] ValidateTokenDTO validateToken){
-            _validateTokenService.ValidateToken(validateToken);
+        public Task<bool> Post([FromBody] InsertValidatedTokenDTO validateToken){
+            _validatedTokenService.InsertValidatedToken(validateToken);
             
-            return Ok(validateToken);
+            return Task.FromResult(false);
         }
     }
 }

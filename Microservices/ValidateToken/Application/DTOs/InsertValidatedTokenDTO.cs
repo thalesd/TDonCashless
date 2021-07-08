@@ -1,6 +1,6 @@
 namespace TDonCashless.Microservices.ValidateToken.Application.DTOs
 {
-    public class ValidateTokenDTO
+    public class InsertValidatedTokenDTO
     {
         public int CustomerId {get; set;}
         public int CustomerCardId {get; set;}
