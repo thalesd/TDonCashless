@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TDonCashless.Domain.Core.Bus;
 using TDonCashless.Microservices.CreateCustomerCard.Application.DTOs;
 using TDonCashless.Microservices.CreateCustomerCard.Application.Interfaces;
@@ -39,6 +40,11 @@ namespace TDonCashless.Microservices.CreateCustomerCard.Application.Services
         public IEnumerable<CustomerCard> GetCustomerCards()
         {
             return _customerCardRepository.GetCustomerCards();
+        }
+
+        public Task<bool> RevalidateCustomerCardToken(RevalidateCustomerCardTokenDTO revalidateCustomerCard)
+        {
+            return Task.FromResult(revalidateCustomerCard.Token == _customerCardRepository.CreateCardToken(revalidateCustomerCard.CardNumber, revalidateCustomerCard.CVV));
         }
     }
 }

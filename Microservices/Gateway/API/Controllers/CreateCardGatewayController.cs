@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using TdonCashless.Microservices.Gateway.API.DTOs;
+using TdonCashless.Microservices.Gateway.API.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace TdonCashless.Microservices.Gateway.API.Controllers
 {
@@ -11,11 +9,19 @@ namespace TdonCashless.Microservices.Gateway.API.Controllers
     [Route("api/[controller]")]
     public class CreateCardGatewayController : ControllerBase
     {
-        public CreateCardGatewayController() { }
+        private readonly ICreateCustomerCardService _createCustomerCardService;
+
+        public CreateCardGatewayController(ICreateCustomerCardService createCustomerCardService)
+        {
+            _createCustomerCardService = createCustomerCardService;
+        }
 
         [HttpPost]
-        public void Post()
+        public async Task<JsonResult> Post([FromBody] CreateCardDTO createCardDto)
         {
+            var createdCard = await _createCustomerCardService.CreateCard(createCardDto);
+
+            return new JsonResult(createdCard);
         }
     }
 }

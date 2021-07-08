@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TdonCashless.Microservices.Gateway.API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +33,9 @@ namespace TdonCashless.Microservices.Gateway.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TdonCashless.Microservices.Gateway.API", Version = "v1" });
             });
+
+            services.AddHttpClient<ICreateCustomerCardService, CreateCustomerCardService>();
+            services.AddHttpClient<IValidateTokenService, ValidateTokenService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
