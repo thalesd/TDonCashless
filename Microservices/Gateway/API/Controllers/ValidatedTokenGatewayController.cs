@@ -11,18 +11,18 @@ namespace TdonCashless.Microservices.Gateway.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ValidateTokenGatewayController : ControllerBase
+    public class ValidatedTokenGatewayController : ControllerBase
     {
-        private readonly IValidateTokenService _validateTokenService;
-        public ValidateTokenGatewayController(IValidateTokenService validateTokenService)
+        private readonly IValidatedTokenService _validateTokenService;
+        public ValidatedTokenGatewayController(IValidatedTokenService validateTokenService)
         {
             _validateTokenService = validateTokenService;
         }
 
         [HttpPost]
-        public async Task<bool> Post([FromBody] ValidateCardDTO validateCardDto)
+        public async Task<bool> Post([FromBody] RevalidateCustomerCardTokenDTO revalidateCustomerCardDto)
         {
-            await _validateTokenService.ValidateCard(validateCardDto);
+            await _validateTokenService.ValidateCard(revalidateCustomerCardDto);
 
             return false;
         }

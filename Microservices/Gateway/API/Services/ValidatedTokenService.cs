@@ -5,18 +5,18 @@ using Newtonsoft.Json;
 
 namespace TdonCashless.Microservices.Gateway.API.Services
 {
-    public class ValidateTokenService : IValidateTokenService
+    public class ValidatedTokenService : IValidatedTokenService
     {
         private readonly HttpClient _apiClient;
-        public ValidateTokenService(HttpClient httpClient)
+        public ValidatedTokenService(HttpClient httpClient)
         {
             _apiClient = httpClient;
         }
 
-        public async Task<bool> ValidateCard(ValidateCardDTO validateCardDTO)
+        public async Task<bool> ValidateCard(RevalidateCustomerCardTokenDTO revalidateCustomerCard)
         {
-            var uri = "https://localhost:5003/api/ValidateToken";
-            var content = new StringContent(JsonConvert.SerializeObject(validateCardDTO), System.Text.Encoding.UTF8, "application/json");
+            var uri = "https://localhost:5003/api/RevalidateCustomerCard";
+            var content = new StringContent(JsonConvert.SerializeObject(revalidateCustomerCard), System.Text.Encoding.UTF8, "application/json");
 
             var response = await _apiClient.PostAsync(uri, content);
             response.EnsureSuccessStatusCode();

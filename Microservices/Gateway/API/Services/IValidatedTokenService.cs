@@ -3,8 +3,8 @@ using TdonCashless.Microservices.Gateway.API.DTOs;
 
 namespace TdonCashless.Microservices.Gateway.API.Services
 {
-    public interface IValidateTokenService
+    public interface IValidatedTokenService
     {
-        Task<bool> ValidateCard(ValidateCardDTO validateCardDto);
+        Task<bool> ValidateCard(RevalidateCustomerCardTokenDTO revalidateCustomerCard);
     }
 }

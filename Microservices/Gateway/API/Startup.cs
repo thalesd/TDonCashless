@@ -35,7 +35,7 @@ namespace TdonCashless.Microservices.Gateway.API
             });
 
             services.AddHttpClient<ICreateCustomerCardService, CreateCustomerCardService>();
-            services.AddHttpClient<IValidateTokenService, ValidateTokenService>();
+            services.AddHttpClient<IValidatedTokenService, ValidatedTokenService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
